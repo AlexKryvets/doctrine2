@@ -2988,7 +2988,7 @@ class ClassMetadataInfo implements ClassMetadata
         $this->versionField = $mapping['fieldName'];
 
         if ( ! isset($mapping['default'])) {
-            if (in_array($mapping['type'], array('integer', 'bigint', 'smallint'))) {
+            if (in_array($mapping['type'], array('integer', 'bigint', 'smallint', 'timestamp'))) {
                 $mapping['default'] = 1;
             } else if ($mapping['type'] == 'datetime') {
                 $mapping['default'] = 'CURRENT_TIMESTAMP';
