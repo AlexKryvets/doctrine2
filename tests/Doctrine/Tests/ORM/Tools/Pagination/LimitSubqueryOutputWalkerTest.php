@@ -350,7 +350,7 @@ ORDER BY b.id DESC'
             $query->getSQL()
         );
     }
-
+    
     /**
      * This tests ordering by property that has the 'declared' field.
      */
@@ -369,7 +369,7 @@ ORDER BY b.id DESC'
             $query->getSQL()
         );
     }
-
+    
     /**
      * Tests order by on a subselect expression (mysql).
      */

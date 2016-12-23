@@ -83,4 +83,44 @@ class PersistentCollectionTest extends OrmTestCase
         $this->collection->next();
         $this->assertTrue($this->collection->isInitialized());
     }
+
+    /**
+     * @group 6110
+     */
+    public function testRemovingElementsAlsoRemovesKeys()
+    {
+        $this->setUpPersistentCollection();
+
+        $this->collection->add('dummy');
+        $this->assertEquals([0], array_keys($this->collection->toArray()));
+
+        $this->collection->removeElement('dummy');
+        $this->assertEquals([], array_keys($this->collection->toArray()));
+    }
+
+    /**
+     * @group 6110
+     */
+    public function testClearWillAlsoClearKeys()
+    {
+        $this->setUpPersistentCollection();
+
+        $this->collection->add('dummy');
+        $this->collection->clear();
+        $this->assertEquals([], array_keys($this->collection->toArray()));
+    }
+
+    /**
+     * @group 6110
+     */
+    public function testClearWillAlsoResetKeyPositions()
+    {
+        $this->setUpPersistentCollection();
+
+        $this->collection->add('dummy');
+        $this->collection->removeElement('dummy');
+        $this->collection->clear();
+        $this->collection->add('dummy');
+        $this->assertEquals([0], array_keys($this->collection->toArray()));
+    }
 }

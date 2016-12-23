@@ -280,6 +280,15 @@ abstract class OrmFunctionalTestCase extends OrmTestCase
             'Doctrine\Tests\Models\Pagination\User',
             'Doctrine\Tests\Models\Pagination\User1',
         ),
+        'versioned_many_to_one' => array(
+            'Doctrine\Tests\Models\VersionedManyToOne\Category',
+            'Doctrine\Tests\Models\VersionedManyToOne\Article',
+        ),
+        'issue5989' => array(
+            'Doctrine\Tests\Models\Issue5989\Issue5989Person',
+            'Doctrine\Tests\Models\Issue5989\Issue5989Employee',
+            'Doctrine\Tests\Models\Issue5989\Issue5989Manager',
+        ),
     );
 
     /**
@@ -533,6 +542,17 @@ abstract class OrmFunctionalTestCase extends OrmTestCase
             $conn->executeUpdate('DELETE FROM pagination_department');
             $conn->executeUpdate('DELETE FROM pagination_company');
             $conn->executeUpdate('DELETE FROM pagination_user');
+        }
+
+        if (isset($this->_usedModelSets['versioned_many_to_one'])) {
+            $conn->executeUpdate('DELETE FROM versioned_many_to_one_article');
+            $conn->executeUpdate('DELETE FROM versioned_many_to_one_category');
+        }
+
+        if (isset($this->_usedModelSets['issue5989'])) {
+            $conn->executeUpdate('DELETE FROM issue5989_persons');
+            $conn->executeUpdate('DELETE FROM issue5989_employees');
+            $conn->executeUpdate('DELETE FROM issue5989_managers');
         }
 
         $this->_em->clear();

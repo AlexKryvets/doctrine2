@@ -544,6 +544,8 @@ final class PersistentCollection extends AbstractLazyCollection implements Selec
     public function clear()
     {
         if ($this->initialized && $this->isEmpty()) {
+            $this->collection->clear();
+
             return;
         }
 
